@@ -22,4 +22,9 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Samples\" />
+    <Folder Include="Versions\2014.12.24\" />
+  </ItemGroup>
+
 </Project>

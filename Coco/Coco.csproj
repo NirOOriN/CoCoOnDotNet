@@ -12,15 +12,20 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
     <TargetFrameworks>net6.0;</TargetFrameworks>
     <PackAsTool>true</PackAsTool>
     <ToolCommandName>coco</ToolCommandName>
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
+		<UseAppHost>false</UseAppHost>
+		<OutputType>Exe</OutputType>
   </PropertyGroup>
 
   <ItemGroup>
     <None Include="license.txt" Pack="true" PackagePath="license.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="SelfBuild\" />
   </ItemGroup>
 
 </Project>

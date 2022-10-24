@@ -1,0 +1,1 @@
+dotnet Coco.dll "..\Templates\Coco.ATG" -namespace at.jku.ssw.Coco -frames "..\Templates" -o ".."
