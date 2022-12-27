@@ -250,6 +250,7 @@ TokenDecl<int typ>              (. string name; int kind; Symbol sym; Graph g; .
                                      if (tab.literals[tokenString] != null)
                                        SemErr("token string declared twice");
                                      tab.literals[tokenString] = sym;
+                                     tab._traceOnlyliteralsKeysPosition.Add(tokenString);
                                      dfa.MatchLiteral(tokenString, sym);
                                    }
                                  .)

@@ -29,6 +29,8 @@ using System;
 using System.IO;
 using System.Text;
 using System.Collections;
+using System.Reflection;
+using System.Collections.Generic;
 
 namespace at.jku.ssw.Coco {
 
@@ -208,8 +210,10 @@ public class Tab {
 	public Symbol noSym;              // used in case of an error
 	public BitArray allSyncSets;      // union of all synchronisation sets
 	public Hashtable literals;        // symbols that are used as literals
-	
-	public string srcName;            // name of the atg file (including path)
+  public List<string> 
+		_traceOnlyliteralsKeysPosition; // the postion of literalKeys entered (only used when tracing is enabled)
+
+    public string srcName;            // name of the atg file (including path)
 	public string srcDir;             // directory path of the atg file
 	public string nsName;             // namespace for generated files
 	public string frameDir;           // directory containing the frame files
@@ -281,7 +285,8 @@ public class Tab {
 		trace.WriteLine("{0,5} {1}", sym.line, tKind[sym.tokenKind]);
 	}
 
-	public void PrintSymbolTable() {
+	public void PrintSymbolTable() 
+	{
 		trace.WriteLine("Symbol Table:");
 		trace.WriteLine("------------"); trace.WriteLine();
 		trace.WriteLine(" nr name          typ  hasAt graph  del    line tokenKind");
@@ -291,9 +296,15 @@ public class Tab {
 		trace.WriteLine();
 		trace.WriteLine("Literal Tokens:");
 		trace.WriteLine("--------------");
-		foreach (DictionaryEntry e in literals) {
+		foreach(var keyEntry in _traceOnlyliteralsKeysPosition) {
+			var valueEntry = literals[keyEntry];
+      trace.WriteLine("_" + ((Symbol)valueEntry).name + " = " + keyEntry + ".");
+    }
+		/*
+    foreach (DictionaryEntry e in literals) {
 			trace.WriteLine("_" + ((Symbol)e.Value).name + " = " + e.Key + ".");
 		}
+		*/
 		trace.WriteLine();
 	}
 	
@@ -1180,6 +1191,7 @@ public class Tab {
 	}
 	
 	public void SetDDT(string s) {
+		_traceOnlyliteralsKeysPosition = new List<string>();
 		s = s.ToUpper();
 		foreach (char ch in s) {
 			if ('0' <= ch && ch <= '9') ddt[ch - '0'] = true;
